@@ -43,15 +43,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataSet\Interfaces\IDataSet.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rules\DecisionRuleType.cs" />
-    <Compile Include="Rules\Interfaces\IRuleCombinator.cs" />
-    <Compile Include="Rules\Interfaces\IRuleType.cs" />
-    <Compile Include="Rules\CollectionRuleType.cs" />
-    <Compile Include="Rules\Interfaces\IStringableRuleType.cs" />
-    <Compile Include="Rules\RuleCombinator.cs" />
-    <Compile Include="Rules\RuleTypeBase.cs" />
+    <Compile Include="Attributes\DecisionAttributeType.cs" />
+    <Compile Include="Combinator\Interfaces\IAttributeCombinator.cs" />
+    <Compile Include="Attributes\Interfaces\IAttributeType.cs" />
+    <Compile Include="Attributes\CollectionAttributeType.cs" />
+    <Compile Include="Attributes\Interfaces\IStringableAttributeType.cs" />
+    <Compile Include="Combinator\AttributeCombinator.cs" />
+    <Compile Include="Attributes\RuleTypeBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

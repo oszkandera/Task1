@@ -1,12 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Task1.Rules.Interfaces;
+﻿using System.Collections.Generic;
+using Task1.Attributes.Interfaces;
+using Task1.Combinator.Interfaces;
 
-namespace Task1.Rules
+namespace Task1.Combinator
 {
-    public class RuleCombinator : IRuleCombinator
+    public class AttributeCombinator : IAttributeCombinator
     {
-        public List<string> GenerateAllStringCombinations(List<IStringableRuleType> rules)
+        public List<string> GenerateAllStringCombinations(List<IStringableAttributeType> rules)
         {
             var referenceEmptyString = string.Empty;
             var combinations = new List<string>() { referenceEmptyString };
@@ -27,7 +27,8 @@ namespace Task1.Rules
             {
                 foreach (var value in values)
                 {
-                    newCombinations.Add($"{combination};{value}");
+                    var newValue = $"{combination};{value}".Trim(';');
+                    newCombinations.Add(newValue);
                 }
             }
             return newCombinations;

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Task1.Rules.Interfaces;
+using Task1.Attributes.Interfaces;
 
-namespace Task1.Rules
+namespace Task1.Attributes
 {
-    public class RuleTypeBase<T> : IRuleType<T>
+    public class AttributeTypeBase<T> : IAttributeType<T>
     {
         public string Name { get; set; }
         public virtual T[] Values { get; set; }

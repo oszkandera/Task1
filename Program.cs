@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Task1.Rules;
-using Task1.Rules.Interfaces;
+﻿using System.Collections.Generic;
+using Task1.Attributes;
+using Task1.Attributes.Interfaces;
+using Task1.Combinator;
 
 namespace Task1
 {
@@ -11,25 +9,19 @@ namespace Task1
     {
         static void Main(string[] args)
         {
-            var rules = new List<IStringableRuleType>
+            var rules = new List<IStringableAttributeType>
             {
-                new CollectionRuleType<string> { Name = "Outlook", Values = new string[] { "Sanny", "Overcast", "Rainy" } },
-                new CollectionRuleType<string> { Name = "Temperature", Values = new string[] { "Hot", "Mild", "Cold" } },
-                new CollectionRuleType<string> { Name = "Humidity", Values = new string[] { "High", "Normal" } },
-                new DecisionRuleType { Name = "Windy" }
+                new CollectionAttributeType<string> { Name = "Outlook", Values = new string[] { "Sanny", "Overcast", "Rainy" } },
+                new CollectionAttributeType<string> { Name = "Temperature", Values = new string[] { "Hot", "Mild", "Cold" } },
+                new CollectionAttributeType<string> { Name = "Humidity", Values = new string[] { "High", "Normal" } },
+                new DecisionAttributeType { Name = "Windy" }
             };
 
-            //byte x = 3;
-
-            //var b = new BitArray(new byte[] { x });
-
-            //var k = b.Get(1);
-
-            var ruleCombinator = new RuleCombinator();
+            
+            var ruleCombinator = new AttributeCombinator();
 
             var ruleCombinations = ruleCombinator.GenerateAllStringCombinations(rules);
 
-            //var x = ruleCombinator.PermutationOf<string>(new HashSet<string> { "Sanny", "Overcast", "Rainy", "Hot", "Mild", "Cold", "High", "Normal", "True", "False" });
         }
     }
 }
