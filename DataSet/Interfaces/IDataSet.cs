@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Task1.DataSet.Interfaces
 {
     public interface IDataSet
     {
-
+        List<Tuple<string, string>> Instances { get; }
+        List<string> FindRulesInDataSet(List<string> attributeCombinations);
+        List<Tuple<string, double>> GetSupportOfRules(List<string> rules);
+        List<Tuple<string, double>> GetConfidenceOfRules(List<string> rules);
     }
 }
