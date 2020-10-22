@@ -33,16 +33,29 @@ namespace Task1.DataSet
             {
                 foreach(var attributeCombination in attributeCombinations)
                 {
-                    if (String.IsNullOrWhiteSpace(attributeCombination)) continue; 
+                    if (String.IsNullOrWhiteSpace(attributeCombination)) continue;
 
-                    if (instance.ToLower().Contains(attributeCombination.ToLower()))
-                    {
-                        rules.Add(attributeCombination);
-                    }
+                    if (InstanceContainsAttributeCombination(instance, attributeCombination)) rules.Add(attributeCombination);
                 }
             }
 
             return rules.ToList();
+        }
+
+        private bool InstanceContainsAttributeCombination(string instance, string attributeCombination)
+        {
+            var attributesInInstance = instance.Split(';').Select(x => x.ToLower());
+            var attributesInCombination = attributeCombination.Split(';');
+
+            var attributesInCombinationCount = attributesInCombination.Count();
+            var equationCounter = 0;
+
+            foreach(var attributeInCombination in attributesInCombination)
+            {
+                if (attributesInInstance.Contains(attributeInCombination.ToLower())) equationCounter++;
+            }
+
+            return equationCounter == attributesInCombinationCount;
         }
 
         public List<Tuple<string, double>> GetSupportOfRules(List<string> rules)
@@ -54,7 +67,7 @@ namespace Task1.DataSet
                 var positiveInstanceNumber = 0;
                 foreach(var instance in Instances)
                 {
-                    if (instance.Item1.ToLower().Contains(rule.ToLower())) positiveInstanceNumber++;
+                    if (InstanceContainsAttributeCombination(instance.Item1, rule)) positiveInstanceNumber++;
                 }
 
                 double support = (double)positiveInstanceNumber / Instances.Count;
@@ -75,7 +88,7 @@ namespace Task1.DataSet
                 var negativeInstanceNumber = 0;
                 foreach (var instance in Instances)
                 {
-                    if (instance.Item1.ToLower().Contains(rule.ToLower()))
+                    if (InstanceContainsAttributeCombination(instance.Item1, rule))
                     {
                         if (instance.Item2 == "yes") positiveInstanceNumber++;
                         if (instance.Item2 == "no") negativeInstanceNumber++;
@@ -85,7 +98,6 @@ namespace Task1.DataSet
                 double confidence = (double)positiveInstanceNumber / (positiveInstanceNumber + negativeInstanceNumber);
 
                 rulesWithConfidence.Add(new Tuple<string, double>(rule, confidence));
-
             }
             return rulesWithConfidence;
         }
