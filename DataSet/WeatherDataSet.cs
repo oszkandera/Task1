@@ -101,5 +101,29 @@ namespace Task1.DataSet
             }
             return rulesWithConfidence;
         }
+
+        public List<Tuple<string, double, double>> GetSupportAndConfidenceOdRules(List<string> rules)
+        {
+            var rulesWithConfidence = new List<Tuple<string, double, double>>();
+
+            foreach (var rule in rules)
+            {
+                var positiveInstanceNumber = 0;
+                var negativeInstanceNumber = 0;
+                foreach (var instance in Instances)
+                {
+                    if (InstanceContainsAttributeCombination(instance.Item1, rule))
+                    {
+                        if (instance.Item2 == "yes") positiveInstanceNumber++;
+                        if (instance.Item2 == "no") negativeInstanceNumber++;
+                    }
+                }
+
+                double confidence = (double)positiveInstanceNumber / (positiveInstanceNumber + negativeInstanceNumber);
+                double support = (double)(positiveInstanceNumber + negativeInstanceNumber) / Instances.Count;
+                rulesWithConfidence.Add(new Tuple<string, double, double>(rule, confidence, support));
+            }
+            return rulesWithConfidence;
+        }
     }
 }

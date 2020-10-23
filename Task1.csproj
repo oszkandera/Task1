@@ -45,6 +45,8 @@
   <ItemGroup>
     <Compile Include="DataSet\WeatherDataSet.cs" />
     <Compile Include="DataSet\Interfaces\IDataSet.cs" />
+    <Compile Include="Exporter\FileExporter.cs" />
+    <Compile Include="Exporter\Interfaces\IFileExporter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Attributes\DecisionAttributeType.cs" />
